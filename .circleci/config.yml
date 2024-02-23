@@ -8,6 +8,19 @@ jobs:
     executor: android/android
     steps:
       - checkout
+      - run:
+          name: Check java
+          command: |
+            # set -xe
+            # JAVA_VERSION=zulu11.31.11-ca-jdk11.0.3-linux_x64
+            # wget https://cdn.azul.com/zulu/bin/${JAVA_VERSION}.tar.gz \
+            #   -O /tmp/${JAVA_VERSION}.tar.gz
+            # sudo tar -zxf /tmp/${JAVA_VERSION}.tar.gz -C /usr/lib/jvm
+            # ls -l /usr/lib/jvm/
+            # export JAVA_HOME="/usr/lib/jvm/${JAVA_VERSION}"
+            # export PATH=/usr/lib/jvm/${JAVA_VERSION}/bin:$PATH
+            
+            java -version
       - restore_cache:
           key: android-orb-v1-
       - run:
