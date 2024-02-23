@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_news">Title</string>
+    <string name="description_news">Description</string>
+    <string name="date_news">Date</string>
+    <string name="headline_news">Headline</string>
+</resources>

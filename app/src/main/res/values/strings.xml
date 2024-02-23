@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Serunews</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="something_wrong">Terjadi Kesalahan</string>
+    <string name="date_detail">Date Detail</string>
+    <string name="fabbutton">fabButton</string>
+    <string name="category_news">Category</string>
+    <string name="badge_news">News Badge</string>
+</resources>
