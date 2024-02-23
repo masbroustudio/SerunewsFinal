@@ -16,14 +16,14 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding?.run { this }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,28 +40,30 @@ class HomeFragment : Fragment() {
             homeViewModel.newsIndo.observe(viewLifecycleOwner) { newsIndo ->
                 if (newsIndo != null) {
                     when (newsIndo) {
-                        is com.serunews.core.source.Resource.Loading -> binding.progressBar.visibility =
+                        is com.serunews.core.source.Resource.Loading -> binding!!.progressBar.visibility =
                             View.VISIBLE
 
                         is com.serunews.core.source.Resource.Success -> {
-                            binding.progressBar.visibility = View.GONE
+                            binding!!.progressBar.visibility = View.GONE
                             newsIndoAdapter.setData(newsIndo.data)
                         }
 
                         is com.serunews.core.source.Resource.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            binding.viewError.root.visibility = View.VISIBLE
-                            binding.viewError.tvError.text =
+                            binding!!.progressBar.visibility = View.GONE
+                            binding!!.viewError.root.visibility = View.VISIBLE
+                            binding!!.viewError.tvError.text =
                                 newsIndo.message ?: getString(R.string.something_wrong)
                         }
                     }
                 }
             }
 
-            with(binding.rvNews) {
-                layoutManager = LinearLayoutManager(context)
-                adapter = newsIndoAdapter
-                setHasFixedSize(true)
+            binding?.let {
+                with(it.rvNews) {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = newsIndoAdapter
+                    setHasFixedSize(true)
+                }
             }
         }
     }

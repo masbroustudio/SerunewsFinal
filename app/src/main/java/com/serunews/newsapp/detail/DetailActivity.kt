@@ -10,6 +10,7 @@ import com.serunews.newsapp.R
 import com.serunews.newsapp.databinding.ActivityDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
+@Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
@@ -36,11 +37,13 @@ class DetailActivity : AppCompatActivity() {
             supportActionBar?.title = detailIndoNews.judul
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            binding.content.tvDateDetail.text = detailIndoNews.rilisberita
-            binding.content.tvDetailTitle.text = detailIndoNews.judul
-            binding.content.tvDetailDescription.text = detailIndoNews.headline
-            binding.content.tvDetailCategory.text = detailIndoNews.kategori
-            binding.content.tvDetailNewsbadge.text = detailIndoNews.news_badge
+            binding.apply {
+                content.tvDateDetail.text = detailIndoNews.rilisberita
+                content.tvDetailTitle.text = detailIndoNews.judul
+                content.tvDetailDescription.text = detailIndoNews.headline
+                content.tvDetailCategory.text = detailIndoNews.kategori
+                content.tvDetailNewsbadge.text = detailIndoNews.news_badge
+            }
 
             Glide.with(this@DetailActivity)
                 .load(detailIndoNews.foto)
@@ -49,7 +52,7 @@ class DetailActivity : AppCompatActivity() {
             var statusFavorite = detailIndoNews.isFavorite
 
             setStatusFavorite(statusFavorite)
-            
+
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
                 detailViewModel.setFavoriteNewsIndo(detailIndoNews, statusFavorite)
