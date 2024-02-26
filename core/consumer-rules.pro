@@ -103,3 +103,8 @@
 # Uncomment if you use RxJava
 #-dontwarn java.util.concurrent.Flow*
 -dontwarn java.util.concurrent.Flow*
+
+
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
