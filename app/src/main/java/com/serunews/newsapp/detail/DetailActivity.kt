@@ -10,7 +10,6 @@ import com.serunews.newsapp.R
 import com.serunews.newsapp.databinding.ActivityDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-@Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding

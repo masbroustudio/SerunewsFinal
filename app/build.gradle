@@ -25,7 +25,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
 
-        buildConfigField("String", "BASE_URL", "\"https://jakpost.vercel.app/api/\"")
+        buildConfigField("String", "BASE_URL", "\"https://serunews.free.beeceptor.com/\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

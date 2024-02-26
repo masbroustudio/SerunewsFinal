@@ -1,9 +1,13 @@
 package com.serunews.newsapp
 
 import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.serunews.newsapp.databinding.ActivityMainBinding
@@ -13,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
+    private lateinit var tvPowerStatus: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setCurrentFragment(HomeFragment())
+
+        tvPowerStatus = findViewById(R.id.tv_power_status)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -42,4 +49,35 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
+    private fun registerBroadCastReceiver() {
+        broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                when (intent.action) {
+                    Intent.ACTION_POWER_CONNECTED -> {
+                        Log.d("MainActivity", "Power connected")
+                    }
+
+                    Intent.ACTION_POWER_DISCONNECTED -> {
+                        Log.d("MainActivity", "Power disconnected")
+                    }
+                }
+            }
+        }
+        val intentFilter = IntentFilter()
+        intentFilter.apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+        registerReceiver(broadcastReceiver, intentFilter)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        registerBroadCastReceiver()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
+    }
 }

@@ -24,6 +24,7 @@
                 android:layout_height="200dp"
                 android:contentDescription="@string/headline_news"
                 android:scaleType="centerCrop"
+                tools:ignore="ImageContrastCheck"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
