@@ -1,4 +1,4 @@
-package com.serunews.favorite
+package com.example.favorite
 
 import org.junit.Test
 

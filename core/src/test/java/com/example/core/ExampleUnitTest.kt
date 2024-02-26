@@ -1,4 +1,4 @@
-package com.serunews.core
+package com.example.core
 
 import org.junit.Test
 
